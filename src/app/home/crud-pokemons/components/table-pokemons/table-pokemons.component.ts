@@ -3,8 +3,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Input, OnInit,
-  Output, ViewChild
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
 } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
@@ -13,7 +15,9 @@ import { MatTableDataSource } from "@angular/material/table";
 import { debounceTime, distinctUntilChanged, tap } from "rxjs/operators";
 import { Pokemon } from "src/app/interfaces/poke-api.interface";
 import { PokeApiLsService } from "src/app/services/poke-api-ls.service";
-import { DialogCreatePokemonComponent } from '../dialog-create-user/dialog-create-pokemon.component';
+import { ToastService } from "src/app/services/toast.service";
+import { ConfirmationDialogComponent } from "../confirmation-dialog/confirmation-dialog.component";
+import { DialogCreatePokemonComponent } from "../dialog-create-user/dialog-create-pokemon.component";
 
 @Component({
   selector: "app-table-pokemons",
@@ -48,8 +52,9 @@ export class TablePokemonsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) public paginator: MatPaginator;
 
   constructor(
-    public dialog: MatDialog,
-    public pokeApiLsService: PokeApiLsService
+    private dialog: MatDialog,
+    private pokeApiLsService: PokeApiLsService,
+    private tostService: ToastService
   ) {}
 
   public ngAfterViewInit(): void {
@@ -74,15 +79,12 @@ export class TablePokemonsComponent implements OnInit, AfterViewInit {
 
     const dialogRef = this.dialog.open(DialogCreatePokemonComponent, {
       data: { pokemon, isEdit } as { pokemon: Pokemon; isEdit: boolean },
+      panelClass: "custom-modalbox",
     });
 
     const dialogSubmitSubscription =
       dialogRef.componentInstance.onSubmitForm.subscribe((result) => {
-        if (isEdit) {
-          this.pokeApiLsService.updatePokemonLocalStorage(result);
-        } else {
-          this.pokeApiLsService.addPokemonLocalStorage(result);
-        }
+        isEdit ? this.updatePokemon(result) : this.addPokemon(result);
 
         this.pokemons = this.pokeApiLsService.getPokemonsFromLocalStorage();
 
@@ -90,8 +92,36 @@ export class TablePokemonsComponent implements OnInit, AfterViewInit {
       });
   }
 
+  showDialog(pokemon: Pokemon): void {
+    this.dialog
+      .open(ConfirmationDialogComponent, {
+        data: `¿Estás seguro de eliminar el Pokemon ${pokemon.name}?`,
+        panelClass: "custom-modalbox",
+      })
+      .afterClosed()
+      .subscribe((confirm: Boolean) => {
+        if (confirm) {
+          this.deletePokemon(pokemon);
+        } else {
+          this.tostService.info("Operación cancelada", "Cancelado");
+        }
+      });
+  }
+
+  updatePokemon(pokemon: Pokemon): void {
+    this.pokeApiLsService.updatePokemonLocalStorage(pokemon);
+    this.tostService.success("Pokemon editado", "¡Éxito!");
+  }
+
+  addPokemon(pokemon: Pokemon): void {
+    this.pokeApiLsService.addPokemonLocalStorage(pokemon);
+    this.tostService.success("Pokemon agregado", "¡Éxito!");
+  }
+
   deletePokemon(pokemon: Pokemon): void {
     this.pokeApiLsService.deletePokemonLocalStorage(pokemon);
     this.pokemons = this.pokeApiLsService.getPokemonsFromLocalStorage();
+
+    this.tostService.success("Pokemon eliminado con éxito", "¡Éxito!");
   }
 }

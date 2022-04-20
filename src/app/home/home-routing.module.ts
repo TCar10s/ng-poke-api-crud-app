@@ -15,7 +15,7 @@ const routes: Routes = [
       },
       {
         path: 'crud-users',
-        loadChildren: () => import('./crud-users/crud-pokemons.module').then((m) => m.CrudPokemonsModule),
+        loadChildren: () => import('./crud-pokemons/crud-pokemons.module').then((m) => m.CrudPokemonsModule),
       },
       {
         path: "**",

@@ -1,6 +1,5 @@
 .crud-table {
   margin: 5rem 1.5rem;
-
 }
 
 .title {
@@ -49,7 +48,6 @@
       font-weight: bold;
       font-size: 1rem;
     }
-
   }
 
   mat-paginator {
@@ -58,7 +56,11 @@
 }
 
 .card-style {
-  background-image: linear-gradient(to right, rgba(102, 153, 255, 0), rgba(255, 255, 255, 0.25));
+  background-image: linear-gradient(
+    to right,
+    rgba(102, 153, 255, 0),
+    rgba(255, 255, 255, 0.25)
+  );
   background-color: rgba(255, 255, 255, 0.1);
   border: rgb(57, 127, 204) solid 1px;
 }

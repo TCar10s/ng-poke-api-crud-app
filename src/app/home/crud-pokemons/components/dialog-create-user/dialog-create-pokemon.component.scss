@@ -1,0 +1,27 @@
+.form-field {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  margin-bottom: 1rem;
+}
+
+::ng-deep .custom-modalbox {
+  mat-dialog-container {
+    background: #193252;
+    color: #fff;
+
+    mat-form-field {
+      input {
+        background: inherit;
+      }
+      ::placeholder {
+        color: #ffffff3d;
+      }
+      label {
+        color: #fff;
+      }
+    }
+  }
+}

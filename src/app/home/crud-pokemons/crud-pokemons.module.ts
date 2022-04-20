@@ -9,6 +9,7 @@ import { DialogCreatePokemonComponent } from "./components/dialog-create-user/di
 import { TablePokemonsComponent } from "./components/table-pokemons/table-pokemons.component";
 import { CrudPokemonsRoutingModule } from "./crud-pokemons-routing.module";
 import { CrudPokemonsComponent } from "./crud-pokemons.component";
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { CrudPokemonsComponent } from "./crud-pokemons.component";
     TablePokemonsComponent,
     DialogCreatePokemonComponent,
     FilterPokemonByNamePipe,
+    ConfirmationDialogComponent,
   ],
   imports: [
     CommonModule,
