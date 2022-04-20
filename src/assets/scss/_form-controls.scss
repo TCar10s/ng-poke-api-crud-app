@@ -1,0 +1,54 @@
+.input-class {
+  display: flex;
+  border-radius: 20px;
+  border: solid 2px #33348b;
+  background-color: white;
+  overflow: hidden;
+  padding: 5px;
+
+  &-icon {
+    margin: auto;
+    width: 10%;
+    color: #449bff;
+    transform: scaleX(-1);
+  }
+
+  .password-icon {
+    margin: auto;
+    width: 10%;
+    color: #449bff;
+    cursor: pointer;
+    pointer-events: unset !important;
+  }
+}
+
+input[type="password"],
+.menus {
+  color: #585858;
+  padding: 5px 0;
+  text-align: left;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 90%;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  border: unset;
+}
+
+input[type="text"]:focus {
+  background-color: #fff;
+  outline: none;
+}
+
+.btn-register {
+  color: white;
+  background-image: linear-gradient(-90deg, #31488c, #4496fd);
+  cursor: pointer;
+  border-radius: 50%;
+  border: none;
+  padding: .5rem .6rem;
+}

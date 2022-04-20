@@ -8,6 +8,7 @@ import { UserResponse } from "../interfaces/api-user.interface";
   providedIn: "root",
 })
 export class ApiUsersService {
+
   constructor(private http: HttpClient) {}
 
   public getListUsers({
@@ -15,7 +16,7 @@ export class ApiUsersService {
     pageSize = 5,
   }): Observable<UserResponse> {
     return this.http.get<UserResponse>(
-      `${environment.api}/users?page=${pageIndex}&per_page=${pageSize}`
+      `${environment.api}/pokemon?limit=${pageSize}`
     );
   }
 }

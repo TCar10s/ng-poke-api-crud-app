@@ -1,9 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from "@angular/material/paginator";
 import { User } from "../../interfaces/api-user.interface";
 import { ApiUsersService } from "../../services/api-users.service";
-import { DialogCreateUserComponent } from './components/dialog-create-user/dialog-create-user.component';
 
 const INITIAL_PAGINATOR_VALUE = {
   length: 0,
@@ -22,10 +20,7 @@ export class CrudUsersComponent implements OnInit {
 
   public users: User[] = [];
 
-  constructor(
-    private apiUsersService: ApiUsersService,
-    public dialog: MatDialog
-  ) {}
+  constructor(private apiUsersService: ApiUsersService) {}
 
   public ngOnInit(): void {
     this.getListUsers(INITIAL_PAGINATOR_VALUE);
@@ -35,16 +30,14 @@ export class CrudUsersComponent implements OnInit {
     this.apiUsersService.getListUsers(event).subscribe((response) => {
       this.users = response.data;
 
+      this.saveInLocalStorage(this.users);
+
       this.pageSize = response.per_page;
       this.length = response.total;
     });
   }
 
-  public openDialog() {
-    const dialogRef = this.dialog.open(DialogCreateUserComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+  public saveInLocalStorage(users: User[]): void {
+    localStorage.setItem("users", JSON.stringify(users));
   }
 }
