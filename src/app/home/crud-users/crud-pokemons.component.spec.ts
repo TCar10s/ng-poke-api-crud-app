@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TableUsersComponent } from './table-users.component';
+import { CrudPokemonsComponent } from './crud-pokemons.component';
 
-describe('TableUsersComponent', () => {
-  let component: TableUsersComponent;
-  let fixture: ComponentFixture<TableUsersComponent>;
+describe('CrudPokemonsComponent', () => {
+  let component: CrudPokemonsComponent;
+  let fixture: ComponentFixture<CrudPokemonsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TableUsersComponent ]
+      declarations: [ CrudPokemonsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TableUsersComponent);
+    fixture = TestBed.createComponent(CrudPokemonsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

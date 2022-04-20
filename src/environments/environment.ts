@@ -1,5 +1,5 @@
 // your variables here
 export const environment = {
   production: false,
-  api: "https://pokeapi.co/api"
+  api: "https://pokeapi.co/api/v2"
 };

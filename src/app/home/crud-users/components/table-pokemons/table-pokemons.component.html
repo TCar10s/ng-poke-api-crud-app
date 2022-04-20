@@ -1,0 +1,109 @@
+<div class="crud-table">
+  <div class="crud-table-caption card-style">
+    <h6 class="title">Listado de Pokemons</h6>
+
+    <div class="flex">
+      <div class="input-class">
+        <input
+          type="text"
+          class="menus"
+          placeholder="Buscar pokemon"
+          [formControl]="search"
+        />
+        <mat-icon class="input-class-icon">search</mat-icon>
+      </div>
+
+      <button
+        class="btn btn-register"
+        (click)="openDialog(null)"
+        title="Agregar pokemon"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <table class="card-style" mat-table [dataSource]="pokemons">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let pokemon">
+          {{ pokemon.name | titlecase }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="base_experience">
+        <th mat-header-cell *matHeaderCellDef>Experiencia</th>
+        <td mat-cell *matCellDef="let pokemon">
+          {{ pokemon.base_experience }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="abilities">
+        <th mat-header-cell *matHeaderCellDef>Habilidades</th>
+        <td mat-cell *matCellDef="let pokemon">
+          {{ pokemon.ability | titlecase }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="types">
+        <th mat-header-cell *matHeaderCellDef>Tipo</th>
+        <td mat-cell *matCellDef="let pokemon">
+          {{ pokemon.type | titlecase }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="sprites">
+        <th mat-header-cell *matHeaderCellDef>Image</th>
+        <td mat-cell *matCellDef="let pokemon">
+          <img
+            [src]="pokemon.imageUrl"
+            [title]="pokemon.name"
+            [alt]="pokemon.name"
+            width="50"
+          />
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef>Editar</th>
+        <td mat-cell *matCellDef="let pokemon">
+          <button
+            (click)="openDialog(pokemon)"
+            class="btn btn-edit"
+            title="Editar pokemon"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>Borrar</th>
+        <td mat-cell *matCellDef="let pokemon">
+          <button
+            class="btn btn-delete"
+            title="Eliminar pokemon"
+            (click)="deletePokemon(pokemon)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      class="card-style"
+      (page)="onPageChange.emit($event)"
+      [length]="length"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      [showFirstLastButtons]="showFirstLastButtons"
+      aria-label="Select page of users"
+    >
+    </mat-paginator>
+  </div>
+</div>

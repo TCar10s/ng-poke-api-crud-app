@@ -1,0 +1,18 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<!-- <div> -->
+<!-- header and title of section -->
+<div class="crud-wraper">
+  <div class="header"></div>
+</div>
+<!-- Showing dashboard with information -->
+
+<div class="ScrollBar crud-box-wrapper">
+  <app-table-pokemons
+    [pokemons]="pokemons"
+    [pageSize]="pageSize"
+    [length]="length"
+    (onPageChange)="getListPokemons($event)"
+    (onSearch)="getPokemonByName($event)"
+  ></app-table-pokemons>
+</div>
+<!-- </div> -->

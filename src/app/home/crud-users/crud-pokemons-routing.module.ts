@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CrudUsersComponent } from './crud-users.component';
+import { CrudPokemonsComponent } from './crud-pokemons.component';
 
-const routes: Routes = [{ path: '', component: CrudUsersComponent }];
+
+const routes: Routes = [{ path: '', component: CrudPokemonsComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CrudUsersRoutingModule { }
+export class CrudPokemonsRoutingModule { }
