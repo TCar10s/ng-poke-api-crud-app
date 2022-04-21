@@ -39,7 +39,7 @@ export class TablePokemonsComponent implements OnInit, AfterContentInit {
 
   @Input() public pokemons: Pokemon[] = [];
   @Input() public length = 0;
-  @Input() public pageSize = 5;
+  @Input() public pageSize = 0;
   @Input() public pageIndex = 0;
 
   @Output() public pageChange: EventEmitter<PageEvent> =
@@ -58,8 +58,12 @@ export class TablePokemonsComponent implements OnInit, AfterContentInit {
   public ngAfterContentInit(): void {
     this.dataSource.paginator = this.paginator;
 
-    this.length = Number(localStorage.getItem("count"));
-    this.pageIndex = Number(localStorage.getItem("pageIndex"));
+    const event = JSON.parse(localStorage.getItem("event")) as PageEvent;
+    const count = JSON.parse(localStorage.getItem("count")) as number;
+
+    this.length = count || event.length;
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
   }
 
   public ngOnInit(): void {

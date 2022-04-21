@@ -36,8 +36,9 @@ export class CrudPokemonsComponent implements OnInit {
       const { results, count } = response;
 
       this.getPokemons(results).then();
-      this.pokeApiLsService.saveTotalPokemons(count);
-      this.pokeApiLsService.savePageIndex(event.pageIndex);
+      this.pokeApiLsService.save("event", event);
+      // this.pokeApiLsService.save("pageIndex", event.pageIndex);
+      // this.pokeApiLsService.save("pageSize", event.pageSize);
 
       this.length = count;
     });

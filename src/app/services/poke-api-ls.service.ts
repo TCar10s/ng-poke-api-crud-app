@@ -14,7 +14,7 @@ export class PokeApiLsService {
       pokemons.splice(index, 1);
     }
 
-    localStorage.setItem("pokemons", JSON.stringify(pokemons));
+    this.save("pokemons", pokemons);
   }
 
   public updatePokemonLocalStorage(pokemon: Pokemon): void {
@@ -26,7 +26,7 @@ export class PokeApiLsService {
       pokemons[index] = pokemon;
     }
 
-    localStorage.setItem("pokemons", JSON.stringify(pokemons));
+   this.save("pokemons", pokemons);
   }
 
   public addPokemonLocalStorage(pokemon: Pokemon): void {
@@ -36,7 +36,7 @@ export class PokeApiLsService {
       localStorage.setItem("pokemons", JSON.stringify([pokemon]));
     } else {
       pokemons.push(pokemon);
-      localStorage.setItem("pokemons", JSON.stringify(pokemons));
+     this.save("pokemons", pokemons);
     }
   }
 
@@ -48,11 +48,7 @@ export class PokeApiLsService {
     return JSON.parse(localStorage.getItem("pokemons"));
   }
 
-  public saveTotalPokemons(total: number): void {
-    localStorage.setItem("count", total.toString());
-  }
-
-  public savePageIndex(pageIndex: number): void {
-    localStorage.setItem("pageIndex", pageIndex.toString());
+  public save(key: string, value: any | any[]): void {
+    localStorage.setItem(key, JSON.stringify(value));
   }
 }
