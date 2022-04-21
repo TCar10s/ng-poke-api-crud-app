@@ -43,8 +43,7 @@ export class LoginComponent implements OnInit {
     private toastService: ToastService,
     private loadingService: LoadingService,
     private authService: AuthService
-  ) {
-  }
+  ) {}
 
   public async ngOnInit() {
     this.controlsCreate();
@@ -86,11 +85,12 @@ export class LoginComponent implements OnInit {
    */
   public async login() {
     try {
-
       this.loadingService.setLoading(true);
 
       if (this.form.invalid) {
-        return this.toastService.error("El usuario y contraseña son obligatorios");
+        return this.toastService.error(
+          "El usuario y contraseña son obligatorios"
+        );
       } else {
         if (this.loginInProgress) {
           return;
@@ -99,16 +99,26 @@ export class LoginComponent implements OnInit {
         this.toastService.info("Iniciando, espere un momento.");
         const user = this.form.value["user"];
         const password = this.form.value["password"];
-        localStorage.setItem("RememberMe", this.rememberUser ? "true" : "false");
+        localStorage.setItem(
+          "RememberMe",
+          this.rememberUser ? "true" : "false"
+        );
+
+        const response = this.authService.login(user, password);
+
 
         setTimeout(() => {
 
-          const response = this.authService.login(user, password);
-
-          if(!response) return this.toastService.error("Error al iniciar sesión");
+          if (!response) {
+            this.toastService.error("Revise sus credenciales e intente de nuevo");
+            this.loadingService.setLoading(false);
+            return;
+          }
 
           this.toastService.success(
-            "Bienvenido '" + this.authService.getNames({firstName: true, lastName: true}) + "'",
+            "Bienvenido '" +
+              this.authService.getNames({ firstName: true, lastName: true }) +
+              "'",
             "Exito"
           );
 
@@ -136,6 +146,6 @@ export class LoginComponent implements OnInit {
   }
 
   public clearValue() {
-    this.formRecovery.get('value').setValue('');
+    this.formRecovery.get("value").setValue("");
   }
 }

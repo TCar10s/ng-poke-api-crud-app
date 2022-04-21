@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
       {
         icono: "Pacientes@PYP.png",
         nombre: "Pokemons crud",
-        ruta: "/home/crud-users",
+        ruta: "/home/crud-pokemons",
       }
     );
   }

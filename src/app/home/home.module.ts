@@ -1,31 +1,24 @@
-import { CdkStepper } from '@angular/cdk/stepper';
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CdkStepper } from "@angular/cdk/stepper";
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule } from "../common/material/material.module";
-import { HomeRoutingModule } from './home-routing.module';
-import { HomeSideBarComponent } from './home-side-bar/home-side-bar.component';
-import { HomeComponent } from './home.component';
+import { HomeSideBarComponent } from "./home-side-bar/home-side-bar.component";
+import { HomeComponent } from "./home.component";
+import { HomeRoutingModule } from "./home.routing";
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-    HomeSideBarComponent
-  ],
-  exports: [
-  ],
+  declarations: [HomeComponent, HomeSideBarComponent],
+  exports: [],
   imports: [
     CommonModule,
     HomeRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    MaterialModule
+    MaterialModule,
   ],
-  providers: [
-    CdkStepper
-  ]
+  providers: [CdkStepper],
 })
-export class HomeModule {
-}
+export class HomeModule {}

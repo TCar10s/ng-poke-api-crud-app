@@ -17,7 +17,7 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'crud-users',
+        path: 'crud-pokemons',
         loadChildren: () => import('./crud-pokemons/crud-pokemons.module').then((m) => m.CrudPokemonsModule),
         canLoad: [AuthGuard],
         canActivate: [AuthGuard]
