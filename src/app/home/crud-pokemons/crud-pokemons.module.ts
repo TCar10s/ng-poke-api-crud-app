@@ -4,7 +4,6 @@ import { NgModule } from "@angular/core";
 
 import { ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule } from "src/app/common/material/material.module";
-import { FilterPokemonByNamePipe } from "src/app/common/pipes/filter-pokemons.pipe";
 import { DialogCreatePokemonComponent } from "./components/dialog-create-user/dialog-create-pokemon.component";
 import { TablePokemonsComponent } from "./components/table-pokemons/table-pokemons.component";
 import { CrudPokemonsRoutingModule } from "./crud-pokemons-routing.module";
@@ -16,7 +15,6 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     CrudPokemonsComponent,
     TablePokemonsComponent,
     DialogCreatePokemonComponent,
-    FilterPokemonByNamePipe,
     ConfirmationDialogComponent,
   ],
   imports: [
