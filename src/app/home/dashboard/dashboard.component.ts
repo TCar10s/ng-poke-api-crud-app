@@ -1,4 +1,5 @@
 import { Component, Injectable, OnInit } from "@angular/core";
+import { Pokemon } from 'src/app/interfaces/poke-api.interface';
 import { DashboardItem } from "../../interfaces/dashboard.item.type";
 import { DashboardService } from "../../services/dashboard.service";
 import { ToastService } from "../../services/toast.service";
@@ -13,6 +14,9 @@ import { ToastService } from "../../services/toast.service";
 })
 export class DashboardComponent implements OnInit {
   public elements: DashboardItem[] = [];
+
+  public pokemons: Pokemon[] = [];
+
   public loading = false;
   public ngxLoadingAnimationTypes = {
     chasingDots: "chasing-dots",
@@ -36,6 +40,10 @@ export class DashboardComponent implements OnInit {
 
   public ngOnInit() {
     this.getData().then();
+
+    this.pokemons = JSON.parse(localStorage.getItem('pokemons'));
+    console.log();
+
   }
 
   /**

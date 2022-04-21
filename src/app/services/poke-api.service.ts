@@ -59,6 +59,7 @@ export class PokeApiService {
       type: pokemon.types[0].type.name,
       imageUrl: pokemon.sprites.other["official-artwork"].front_default,
       id: pokemon.id,
+      weight: pokemon.weight,
     };
   }
 }

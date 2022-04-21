@@ -32,7 +32,6 @@ export class TablePokemonsComponent implements OnInit, AfterViewInit {
     "name",
     "abilities",
     "types",
-    "base_experience",
     "sprites",
     "edit",
     "delete",

@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule } from "../common/material/material.module";
 import { HomeSideBarComponent } from "./home-side-bar/home-side-bar.component";
 import { HomeComponent } from "./home.component";
-import { HomeRoutingModule } from "./home.routing";
+import { HomeRoutingModule } from "./home-routing.module";
 
 @NgModule({
   declarations: [HomeComponent, HomeSideBarComponent],

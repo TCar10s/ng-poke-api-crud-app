@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { DashboardItem } from "../../../interfaces/dashboard.item.type";
+import { Pokemon } from 'src/app/interfaces/poke-api.interface';
 import { DashboardComponent } from "../dashboard.component";
 
 @Component({
@@ -8,7 +8,7 @@ import { DashboardComponent } from "../dashboard.component";
   styleUrls: ["./dashboard-box.component.css"],
 })
 export class DashboardBoxComponent implements OnInit {
-  @Input() public data: DashboardItem;
+  @Input() public data: Pokemon;
   @Input() public mainRef: DashboardComponent;
   public expanded = false;
 

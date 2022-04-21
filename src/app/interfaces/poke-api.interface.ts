@@ -43,6 +43,7 @@ export type Pokemon = {
   type: string;
   imageUrl: string;
   id: number;
+  weight: number;
 };
 
 export interface Ability {
