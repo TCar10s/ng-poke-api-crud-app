@@ -39,11 +39,12 @@ export class TablePokemonsComponent implements OnInit, AfterContentInit {
 
   @Input() pokemons: Pokemon[] = [];
   @Input() length = 0;
-  @Input() pageSize = 0;
+  @Input() pageSize = 5;
+  @Input() pageIndex= 0;
 
-  @Output() onPageChange: EventEmitter<PageEvent> =
+  @Output() pageChange: EventEmitter<PageEvent> =
     new EventEmitter<PageEvent>();
-  @Output() onSearch: EventEmitter<string> = new EventEmitter<string>();
+  @Output() searchEvent: EventEmitter<string> = new EventEmitter<string>();
 
   public dataSource = new MatTableDataSource<Pokemon>(this.pokemons);
   @ViewChild(MatPaginator) public paginator: MatPaginator;
@@ -58,6 +59,7 @@ export class TablePokemonsComponent implements OnInit, AfterContentInit {
     this.dataSource.paginator = this.paginator;
 
     this.length = Number(localStorage.getItem("count"));
+    this.pageIndex = Number(localStorage.getItem("pageIndex"));
   }
 
   ngOnInit(): void {
@@ -66,7 +68,7 @@ export class TablePokemonsComponent implements OnInit, AfterContentInit {
         debounceTime(1000),
         distinctUntilChanged(),
         tap((value: string) => {
-          this.onSearch.emit(value.toLocaleLowerCase());
+          this.searchEvent.emit(value.toLocaleLowerCase());
         })
       )
       .subscribe();

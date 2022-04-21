@@ -19,11 +19,11 @@ export class PokeApiService {
     pageSize = 5,
   }): Promise<PokeApiResponse> {
     try {
+      const offSet = pageIndex * pageSize;
+
       const response = await this.http
         .get<PokeApiResponse>(
-          `${environment.api}/pokemon?offset=${
-            pageIndex * pageSize
-          }&limit=${pageSize}`
+          `${environment.api}/pokemon?offset=${offSet}&limit=${pageSize}`
         )
         .toPromise();
 

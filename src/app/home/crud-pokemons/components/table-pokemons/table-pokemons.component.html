@@ -90,9 +90,10 @@
   </div>
   <mat-paginator
     class="card-style"
-    (page)="onPageChange.emit($event)"
+    (page)="pageChange.emit($event)"
     [length]="length"
     [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
     [pageSizeOptions]="pageSizeOptions"
     [showFirstLastButtons]="showFirstLastButtons"
     aria-label="Select page of users"

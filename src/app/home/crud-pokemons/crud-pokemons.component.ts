@@ -1,7 +1,4 @@
-import {
-  Component,
-  OnInit
-} from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { PageEvent } from "@angular/material/paginator";
 import { Pokemon, ResultPokemon } from "../../interfaces/poke-api.interface";
 import { PokeApiService } from "../../services/poke-api.service";
@@ -36,11 +33,12 @@ export class CrudPokemonsComponent implements OnInit {
   }
 
   public getListPokemons(event: PageEvent): void {
-    this.pokeApiService.getListPokemons(event).then((reponse) => {
-      const { results, count } = reponse;
+    this.pokeApiService.getListPokemons(event).then((response) => {
+      const { results, count } = response;
 
       this.getPokemons(results);
       this.saveTotalPokemons(count);
+      this.savePageIndex(event.pageIndex);
 
       this.length = count;
     });
@@ -78,5 +76,9 @@ export class CrudPokemonsComponent implements OnInit {
 
   public saveTotalPokemons(total: number): void {
     localStorage.setItem("count", total.toString());
+  }
+
+  public savePageIndex(pageIndex: number): void {
+    localStorage.setItem("pageIndex", pageIndex.toString());
   }
 }

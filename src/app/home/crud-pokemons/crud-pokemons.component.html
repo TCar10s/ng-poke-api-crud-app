@@ -11,8 +11,8 @@
     [pokemons]="pokemons"
     [pageSize]="pageSize"
     [length]="length"
-    (onPageChange)="getListPokemons($event)"
-    (onSearch)="getPokemonByName($event)"
+    (pageChange)="getListPokemons($event)"
+    (searchEvent)="getPokemonByName($event)"
   ></app-table-pokemons>
 </div>
 <!-- </div> -->
