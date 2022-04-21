@@ -8,14 +8,12 @@ import { User } from "../interfaces/user.type";
 export class AuthService {
   private _authenticatedUser: User = {
     active: true,
-    lastName: "Lobo",
-    secondLastName: "Silva",
+    lastName: "Apellido",
+    secondLastName: "Apellido 2",
     createDate: new Date(),
     id: 1,
-    secondName: "Samuel",
-    firstName: "Carlos",
-    nickName: "TCar10s",
-    password: "123456",
+    secondName: "Nombre 2",
+    firstName: "Nombre",
   };
 
   constructor(private http: HttpClient) {}
@@ -50,28 +48,5 @@ export class AuthService {
       return "";
     }
     return name;
-  }
-
-  public login(username: string, password: string): boolean {
-    if (
-      username === this._authenticatedUser.nickName &&
-      password === this._authenticatedUser.password
-    ) {
-      this.saveSession(this._authenticatedUser);
-      return true;
-    }
-    return false;
-  }
-
-  public saveSession(user: User) {
-    localStorage.setItem("session", JSON.stringify(user));
-  }
-
-  public isLoggedIn(): boolean {
-    return localStorage.getItem("session") !== null;
-  }
-
-  public logout() {
-    localStorage.removeItem("session");
   }
 }
