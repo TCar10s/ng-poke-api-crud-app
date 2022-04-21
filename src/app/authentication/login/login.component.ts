@@ -106,7 +106,6 @@ export class LoginComponent implements OnInit {
 
         const response = this.authService.login(user, password);
 
-
         setTimeout(() => {
 
           if (!response) {

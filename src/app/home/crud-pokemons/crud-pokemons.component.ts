@@ -35,7 +35,7 @@ export class CrudPokemonsComponent implements OnInit {
     this.pokeApiService.getListPokemons(event).then((response) => {
       const { results, count } = response;
 
-      this.getPokemons(results);
+      this.getPokemons(results).then();
       this.pokeApiLsService.saveTotalPokemons(count);
       this.pokeApiLsService.savePageIndex(event.pageIndex);
 

@@ -67,7 +67,7 @@ export class DashboardComponent implements OnInit {
   public getListPokemons(event: PageEvent): void {
     this.pokeApiService.getListPokemons(event).then((response) => {
       const { results, count } = response;
-      this.getPokemons(results);
+      this.getPokemons(results).then();
       this.pokeApiLsService.saveTotalPokemons(count);
     });
   }

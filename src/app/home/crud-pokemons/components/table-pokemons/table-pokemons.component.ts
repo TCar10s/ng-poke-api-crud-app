@@ -35,16 +35,16 @@ export class TablePokemonsComponent implements OnInit, AfterContentInit {
     "delete",
   ];
 
-  search: FormControl = new FormControl();
+  public search: FormControl = new FormControl();
 
-  @Input() pokemons: Pokemon[] = [];
-  @Input() length = 0;
-  @Input() pageSize = 5;
-  @Input() pageIndex= 0;
+  @Input() public pokemons: Pokemon[] = [];
+  @Input() public length = 0;
+  @Input() public pageSize = 5;
+  @Input() public pageIndex = 0;
 
-  @Output() pageChange: EventEmitter<PageEvent> =
+  @Output() public pageChange: EventEmitter<PageEvent> =
     new EventEmitter<PageEvent>();
-  @Output() searchEvent: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public searchEvent: EventEmitter<string> = new EventEmitter<string>();
 
   public dataSource = new MatTableDataSource<Pokemon>(this.pokemons);
   @ViewChild(MatPaginator) public paginator: MatPaginator;
@@ -62,7 +62,7 @@ export class TablePokemonsComponent implements OnInit, AfterContentInit {
     this.pageIndex = Number(localStorage.getItem("pageIndex"));
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.search.valueChanges
       .pipe(
         debounceTime(1000),
@@ -92,14 +92,14 @@ export class TablePokemonsComponent implements OnInit, AfterContentInit {
       });
   }
 
-  showDialog(pokemon: Pokemon): void {
+  public showDialog(pokemon: Pokemon): void {
     this.dialog
       .open(ConfirmationDialogComponent, {
         data: `¿Estás seguro de eliminar el Pokemon ${pokemon.name}?`,
         panelClass: "custom-modalbox",
       })
       .afterClosed()
-      .subscribe((confirm: Boolean) => {
+      .subscribe((confirm) => {
         if (confirm) {
           this.deletePokemon(pokemon);
         } else {
@@ -108,17 +108,17 @@ export class TablePokemonsComponent implements OnInit, AfterContentInit {
       });
   }
 
-  updatePokemon(pokemon: Pokemon): void {
+  public updatePokemon(pokemon: Pokemon): void {
     this.pokeApiLsService.updatePokemonLocalStorage(pokemon);
     this.tostService.success("Pokemon editado", "¡Éxito!");
   }
 
-  addPokemon(pokemon: Pokemon): void {
+  public addPokemon(pokemon: Pokemon): void {
     this.pokeApiLsService.addPokemonLocalStorage(pokemon);
     this.tostService.success("Pokemon agregado", "¡Éxito!");
   }
 
-  deletePokemon(pokemon: Pokemon): void {
+  public deletePokemon(pokemon: Pokemon): void {
     this.pokeApiLsService.deletePokemonLocalStorage(pokemon);
     this.pokemons = this.pokeApiLsService.getPokemonsFromLocalStorage();
 

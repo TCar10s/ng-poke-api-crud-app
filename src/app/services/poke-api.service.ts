@@ -2,11 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map } from "rxjs/operators";
 import { environment } from "../../environments/environment";
-import {
-  PokeApiResponse,
-  Pokemon,
-  PokemonResponse,
-} from "../interfaces/poke-api.interface";
+import { PokeApiResponse, Pokemon, PokemonResponse, } from "../interfaces/poke-api.interface";
 
 @Injectable({
   providedIn: "root",
@@ -21,13 +17,11 @@ export class PokeApiService {
     try {
       const offSet = pageIndex * pageSize;
 
-      const response = await this.http
+      return await this.http
         .get<PokeApiResponse>(
           `${environment.api}/pokemon?offset=${offSet}&limit=${pageSize}`
         )
         .toPromise();
-
-      return response;
     } catch (error) {
       console.error(error);
     }
@@ -42,12 +36,10 @@ export class PokeApiService {
 
   public async getPokemonByName(name: string): Promise<Pokemon> {
     try {
-      const response = await this.http
+      return await this.http
         .get<PokemonResponse>(`${environment.api}/pokemon/${name}`)
         .pipe(map(this.adaptPokemon))
         .toPromise();
-
-      return response;
     } catch (error) {}
   }
 

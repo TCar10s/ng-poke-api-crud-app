@@ -6,15 +6,6 @@
   stroke-dasharray: unset;
 }
 
-.dashboard-wraper {
-  height: 11vh; /* Fallback for browsers that do not support Custom Properties */
-  height: calc(var(--vh, 1vh) * 11);
-  width: 100%;
-  padding: 0;
-  background-image: linear-gradient(-90deg, #000024, #00234e);
-  box-shadow: 0 1px 13px 0 rgba(0, 0, 0, 0.55);
-}
-
 .TextoIconoHeader {
   font-family: "Montserrat", sans-serif;
   margin-left: 4vmin;
@@ -202,16 +193,6 @@
 
 .mat-icon-open-dashboard {
   color: transparent;
-}
-
-.dashboard-box-wrapper {
-  overflow: auto;
-  height: 89vh;
-  /* Fallback for browsers that do not support Custom Properties */
-  height: calc(var(--vh, 1vh) * 89);
-  background-image: url('/assets/Dashboard/fondoDashboard@PYP.png');
-  z-index: -1;
-  margin-left: -3px;
 }
 
 @media (min-width: 1025px) {

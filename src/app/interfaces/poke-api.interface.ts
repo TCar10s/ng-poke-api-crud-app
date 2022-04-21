@@ -36,7 +36,7 @@ export interface PokemonResponse {
   weight: number;
 }
 
-export type Pokemon = {
+export interface Pokemon {
   name: string;
   base_experience: number;
   ability: string;
@@ -44,7 +44,7 @@ export type Pokemon = {
   imageUrl: string;
   id: number;
   weight: number;
-};
+}
 
 export interface Ability {
   ability: Species;
