@@ -1,8 +1,17 @@
 import { Component, Injectable, OnInit } from "@angular/core";
-import { Pokemon } from 'src/app/interfaces/poke-api.interface';
+import { PageEvent } from "@angular/material/paginator";
+import { Pokemon, ResultPokemon } from "src/app/interfaces/poke-api.interface";
+import { PokeApiLsService } from "src/app/services/poke-api-ls.service";
+import { PokeApiService } from "src/app/services/poke-api.service";
 import { DashboardItem } from "../../interfaces/dashboard.item.type";
 import { DashboardService } from "../../services/dashboard.service";
 import { ToastService } from "../../services/toast.service";
+
+const INITIAL_PAGINATOR_VALUE = {
+  length: 0,
+  pageIndex: 0,
+  pageSize: 5,
+};
 
 @Component({
   selector: "app-dashboard",
@@ -34,16 +43,45 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private dashboardService: DashboardService,
-    private toast: ToastService
+    private toast: ToastService,
+    private pokeApiService: PokeApiService,
+    private pokeApiLsService: PokeApiLsService
   ) {}
-
 
   public ngOnInit() {
     this.getData().then();
 
-    this.pokemons = JSON.parse(localStorage.getItem('pokemons'));
-    console.log();
+    this.validatePokemonsExistence();
+  }
 
+  public validatePokemonsExistence(): void {
+    const pokemons = JSON.parse(localStorage.getItem("pokemons"));
+
+    if (!pokemons) {
+      this.getListPokemons(INITIAL_PAGINATOR_VALUE);
+    } else {
+      this.pokemons = pokemons;
+    }
+  }
+
+  public getListPokemons(event: PageEvent): void {
+    this.pokeApiService.getListPokemons(event).then((response) => {
+      const { results, count } = response;
+      this.getPokemons(results);
+      this.pokeApiLsService.saveTotalPokemons(count);
+    });
+  }
+
+  public async getPokemons(results: ResultPokemon[]) {
+    try {
+      this.pokemons = await Promise.all(
+        results.map((result) => this.pokeApiService.getPokemon(result.url))
+      );
+
+      this.pokeApiLsService.addPokemonsLocalStorage(this.pokemons);
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
   /**

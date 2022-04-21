@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { PageEvent } from "@angular/material/paginator";
+import { PokeApiLsService } from 'src/app/services/poke-api-ls.service';
 import { Pokemon, ResultPokemon } from "../../interfaces/poke-api.interface";
 import { PokeApiService } from "../../services/poke-api.service";
 
@@ -20,15 +21,13 @@ export class CrudPokemonsComponent implements OnInit {
 
   public pokemons: Pokemon[] = [];
 
-  constructor(private pokeApiService: PokeApiService) {}
+  constructor(private pokeApiService: PokeApiService, private pokeApiLsService: PokeApiLsService) {}
 
   public ngOnInit(): void {
-    const pokemons = JSON.parse(localStorage.getItem("pokemons")) || [];
+    const pokemons = JSON.parse(localStorage.getItem("pokemons"));
 
-    if (pokemons && pokemons.length > 0) {
+    if (pokemons) {
       this.pokemons = pokemons;
-    } else {
-      this.getListPokemons(INITIAL_PAGINATOR_VALUE);
     }
   }
 
@@ -37,8 +36,8 @@ export class CrudPokemonsComponent implements OnInit {
       const { results, count } = response;
 
       this.getPokemons(results);
-      this.saveTotalPokemons(count);
-      this.savePageIndex(event.pageIndex);
+      this.pokeApiLsService.saveTotalPokemons(count);
+      this.pokeApiLsService.savePageIndex(event.pageIndex);
 
       this.length = count;
     });
@@ -50,7 +49,7 @@ export class CrudPokemonsComponent implements OnInit {
         results.map((result) => this.pokeApiService.getPokemon(result.url))
       );
 
-      this.saveInLocalStorage(this.pokemons);
+      this.pokeApiLsService.addPokemonsLocalStorage(this.pokemons);
     } catch (error) {
       throw new Error(error);
     }
@@ -66,19 +65,7 @@ export class CrudPokemonsComponent implements OnInit {
 
       this.pokemons = pokemon ? [pokemon] : [];
 
-      this.saveInLocalStorage(this.pokemons);
+      this.pokeApiLsService.addPokemonsLocalStorage(this.pokemons);
     } catch (error) {}
-  }
-
-  public saveInLocalStorage(pokemons: Pokemon[]): void {
-    localStorage.setItem("pokemons", JSON.stringify(pokemons));
-  }
-
-  public saveTotalPokemons(total: number): void {
-    localStorage.setItem("count", total.toString());
-  }
-
-  public savePageIndex(pageIndex: number): void {
-    localStorage.setItem("pageIndex", pageIndex.toString());
   }
 }

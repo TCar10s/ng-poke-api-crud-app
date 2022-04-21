@@ -40,7 +40,19 @@ export class PokeApiLsService {
     }
   }
 
+  public addPokemonsLocalStorage(pokemon: Pokemon[]): void {
+    localStorage.setItem("pokemons", JSON.stringify(pokemon));
+  }
+
   public getPokemonsFromLocalStorage(): Pokemon[] {
     return JSON.parse(localStorage.getItem("pokemons"));
+  }
+
+  public saveTotalPokemons(total: number): void {
+    localStorage.setItem("count", total.toString());
+  }
+
+  public savePageIndex(pageIndex: number): void {
+    localStorage.setItem("pageIndex", pageIndex.toString());
   }
 }
