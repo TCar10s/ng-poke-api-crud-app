@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { NavigationCancel, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { LoadingService } from "./services/loading.service";
 
 @Component({
@@ -54,6 +54,8 @@ export class AppComponent {
       if(event instanceof NavigationStart) {
         this.loadingService.setLoading(true);
       }else if(event instanceof NavigationEnd) {
+        this.loadingService.setLoading(false);
+      } else if(event instanceof NavigationCancel) {
         this.loadingService.setLoading(false);
       }
       // NavigationEnd

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginGuard } from './common/guards/login.guard';
 import { MyPreloadingStrategyService } from "./services/my-preloading-strategy.service";
 
 const routes: Routes = [
@@ -8,7 +9,8 @@ const routes: Routes = [
       loadChildren: () => import('./authentication/authentication.module').then((m) => m.AuthenticationModule),
       data: {
         login: true
-      }
+      },
+      canActivate: [LoginGuard]
     },
     {
       path: 'home',

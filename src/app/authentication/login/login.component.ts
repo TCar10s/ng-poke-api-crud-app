@@ -86,6 +86,9 @@ export class LoginComponent implements OnInit {
    */
   public async login() {
     try {
+
+      this.loadingService.setLoading(true);
+
       if (this.form.invalid) {
         return this.toastService.error("El usuario y contraseña son obligatorios");
       } else {
@@ -97,13 +100,23 @@ export class LoginComponent implements OnInit {
         const user = this.form.value["user"];
         const password = this.form.value["password"];
         localStorage.setItem("RememberMe", this.rememberUser ? "true" : "false");
-        // validate credentials
-        //
-        this.toastService.success(
-          "Bienvenido '" + this.authService.getNames({firstName: true, lastName: true}) + "'",
-          "Exito"
-        );
-        this.router.navigateByUrl("/home/dashboard");
+
+        setTimeout(() => {
+
+          const response = this.authService.login(user, password);
+
+          if(!response) return this.toastService.error("Error al iniciar sesión");
+
+          this.toastService.success(
+            "Bienvenido '" + this.authService.getNames({firstName: true, lastName: true}) + "'",
+            "Exito"
+          );
+
+          this.loadingService.setLoading(false);
+          this.router.navigateByUrl("/home/dashboard");
+        }, 1000);
+
+        this.loginInProgress = false;
       }
     } catch (e) {
       console.log(e);
