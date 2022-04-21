@@ -4,6 +4,7 @@ import { LoginGuard } from './common/guards/login.guard';
 import { MyPreloadingStrategyService } from "./services/my-preloading-strategy.service";
 
 const routes: Routes = [
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
     {
       path: 'login',
       loadChildren: () => import('./authentication/authentication.module').then((m) => m.AuthenticationModule),
