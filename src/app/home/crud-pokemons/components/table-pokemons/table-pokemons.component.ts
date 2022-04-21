@@ -1,12 +1,10 @@
 import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
+  AfterContentInit, Component,
   EventEmitter,
   Input,
   OnInit,
   Output,
-  ViewChild,
+  ViewChild
 } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
@@ -24,7 +22,7 @@ import { DialogCreatePokemonComponent } from "../dialog-create-user/dialog-creat
   templateUrl: "./table-pokemons.component.html",
   styleUrls: ["./table-pokemons.component.scss"],
 })
-export class TablePokemonsComponent implements OnInit, AfterViewInit {
+export class TablePokemonsComponent implements OnInit, AfterContentInit {
   public pageSizeOptions = [5, 10, 25];
   public showFirstLastButtons = true;
 
@@ -56,8 +54,9 @@ export class TablePokemonsComponent implements OnInit, AfterViewInit {
     private tostService: ToastService
   ) {}
 
-  public ngAfterViewInit(): void {
+  public ngAfterContentInit(): void {
     this.dataSource.paginator = this.paginator;
+
     this.length = Number(localStorage.getItem("count"));
   }
 
