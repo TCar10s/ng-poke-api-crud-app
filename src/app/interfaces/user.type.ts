@@ -7,4 +7,6 @@ export interface User {
   lastName: string;
   secondLastName: string;
   createDate: Date;
+  nickName: string;
+  password: string;
 }

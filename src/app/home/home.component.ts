@@ -51,6 +51,7 @@ export class HomeComponent implements OnInit {
 
   public async logout() {
     this.toast.success("Sesión cerrada exitosamente");
+    this.authService.logout();
     this.router.navigateByUrl("/");
   }
 }
